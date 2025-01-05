@@ -172,7 +172,9 @@ class RustLib {
 }
 ```
 
-これでKotlin側でRustライブラリの関数を呼び出す準備が整いました。  
+これでKotlin側でRustライブラリの関数を呼び出す準備が整いました。
+
+
 `Rustlib.isPrime()`を呼び出すことで、Rustライブラリの`Java_com_example_androidappwithrust_RustLib_isPrime`関数を呼び出すことができます。
 
 ### おまけ: Kotlin実装と比較してみる
