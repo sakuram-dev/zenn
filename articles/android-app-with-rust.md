@@ -2,7 +2,7 @@
 title: "Androidアプリ開発者もRustを使いたい！"
 emoji: "🐷"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: [rust, android, mobile]
+topics: [rust, android, mobile, kotlin, jni]
 published: false
 ---
 
@@ -44,15 +44,9 @@ https://security.googleblog.com/2024/09/eliminating-memory-safety-vulnerabilitie
 
 必ずしも同一フォルダ内である必要はありません。各々管理のしやすい構成を選択してください。
 
-### Androidプロジェクトの作成
-`android/`にAndroidプロジェクトを作成します。私はAndroid Studioから新規プロジェクトを作成しました。
+### Rustライブラリの作成
 
-なお、今回はビルド構成にKotlin DSLを使用しています。Groovy DSLを使用している場合は、それに合わせて読み直していただけると幸いです。
-
-### Rustプロジェクトの作成
-
-Rustプロジェクトを初期化し、必要なディレクトリとファイルを作成します。
-
+Rustプロジェクトを初期化し、必要なディレクトリとファイルを作成します。今回はライブラリを作成するため、`--lib`オプションを使用します。
 ```sh
 cd ~/AndroidAppWithRust
 cargo init --lib rust
@@ -60,7 +54,7 @@ cargo init --lib rust
 
 これにより、`rust/`ディレクトリ内に基本的なRustプロジェクトが作成されます。
 
-### ライブラリの作成
+#### Cargo.tomlの設定
 まず、`Cargo.toml`には以下のように設定します。
 
 ```toml
@@ -77,6 +71,8 @@ https://doc.rust-lang.org/reference/linkage.html
 `jni`は、JNI(Java Native Interface)を使用するためのライブラリです。JNIを使用することで、JavaコードからRustのメソッドを呼び出すことができます。
 https://docs.rs/jni/latest/jni/
 
+
+#### 素数判定の実装
 Rustによる素数判定の実装は以下になります。
 
 ```Rust
@@ -131,8 +127,14 @@ cargo build --release --target aarch64-linux-android
 ```
 これにより、`librust_lib.so`が`release`ディレクトリに生成されます。
 
+### Androidプロジェクトの作成
+`android/`にAndroidプロジェクトを作成します。私はAndroid Studioから新規プロジェクトを作成しました。
+
+なお、今回はビルド構成にKotlin DSLを使用しています。Groovy DSLを使用している場合は、それに合わせて読み直していただけると幸いです。
+
 ### AndroidプロジェクトへのRustライブラリの組み込み
-ビルドされたライブラリをAndroidプロジェクトに組み込みます。  
+RustライブラリをAndroidプロジェクトに組み込みます。  
+
 今回はAndroidプロジェクト側に`jniLibs`ディレクトリを作成し、`librust_lib.so`をコピーします。
 
 ```sh
@@ -141,8 +143,7 @@ cp rust/target/aarch64-linux-android/release/librust_lib.so android/app/src/main
 ```
 
 #### Gradleビルドスクリプトの設定
-作成した`jniLibs`ディレクトリをAndroidプロジェクト側のビルドスクリプトに追加します。
-`android/app/build.gradle.kts`に以下の設定を追加します。
+作成した`jniLibs`ディレクトリをAndroidプロジェクト側のビルドスクリプトに追加します。`android/app/build.gradle.kts`に以下の設定を追加します。
 
 ```kotlin
 android {
