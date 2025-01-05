@@ -195,4 +195,4 @@ https://github.com/sakuram-dev/AndroidAppWithRust
 
 AndroidアプリでRustを使うことに興味がある方は、ぜひ試してみてください。
 
-既にAndroidアプリにRustの実装を組み込んでいる方は、ぜひメリット等教えていただけると助かります！
+既にAndroidアプリにRustの実装を組み込んでいる方は、ぜひメリット等教えてください！
