@@ -10,7 +10,7 @@ published: false
 ## AndroidでRustが使われているみたいだけど...？
 近年、RustがAndroid界隈でも活発です。  
 
-Rustは、メモリ安全性、並行性、パフォーマンスの向上など、多くの利点を持つプログラミング言語です。Googleも既存の機能をRustで書き直すことで、メモリリークによるエラーを劇的に減らすことができたと発表しています。
+Rustは、メモリ安全性、並行性、パフォーマンスの向上など、多くの利点を持つプログラミング言語です。Googleも既存の機能をRustで書き直すことで、メモリリークによるバグを劇的に減らすことができたと発表しています。
 
 https://security.googleblog.com/2024/09/eliminating-memory-safety-vulnerabilities-Android.html
 
